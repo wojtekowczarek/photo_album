@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+        Base Template
+        {% endblock %}
+    </title>
+</head>
+<body>
+    <h1>Photo Album</h1>
+    {% block content %}
+
+    {% endblock %}
+
+
+    {% block footer %}
+        Copyright by Wojtek
+    {% endblock %}
+</body>
+</html>
