@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+    Main Page View
+{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for photo in photos %}
+        <li>
+            <p>{{photo.photo}}</p>
+            <p>{{photo.date}}</p>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 form django.contrib.auth import authenticate, login, logout
 from django.views.generic.edit import FormView
 from .forms import UserCreateForm, UserAuthenticateForm
+from .models import Photo
 
 
 # Create your views here.
@@ -33,7 +34,7 @@ class LoginView(View):
     def post(self, request):
         form = UserAuthenticateForm(request.POST)
         if form.is_valid():
-            user = authenticate(username = form.cleaned_data['username'], password=form.cleaned_data['password'])
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
                 login(request, user)
                 return redirect('main')
@@ -45,3 +46,12 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return redirect('login')
+
+
+class MainPageView(LoginRequiredMixin, View):
+    def get(self, request):
+        photos = Photo.objects.all()
+        ctx = {
+            'photos': photos,
+        }
+        return render(request, 'main.html', ctx)
